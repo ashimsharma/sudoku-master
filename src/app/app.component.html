@@ -11,7 +11,16 @@
   <h1>Sudoku Master</h1>
 </header>
 <main>
-  <app-game-board></app-game-board>
+  <div class="flex justify-center items-center gap-10 h-1/2">
+    <div>
+      <app-game-board></app-game-board>
+    </div>
+    <div>
+      <app-timer></app-timer>
+      <app-keypad></app-keypad>
+      <app-button-pallet></app-button-pallet>
+    </div>
+  </div>
 </main>
 <footer class="text-center text-white bg-red-600 p-2 fixed bottom-0 w-full">
   <p>&copy; {{year}} Ashim Sharma. All rights reserved.</p>
