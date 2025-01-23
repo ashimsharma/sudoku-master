@@ -3,7 +3,7 @@
         class="border border-black text-center aspect-square text-2xl p-2 flex justify-center items-center"
         [id]="generateCellId(i)" [ngClass]="{
            'bg-gray-300': isRowSelected(i) || isColumnSelected(i) || isBlockSelected(i),
-           'bg-gray-400': isRowSelected(i) && isColumnSelected(i) && isBlockSelected(i),
+           'bg-gray-400': (isRowSelected(i) && isColumnSelected(i) && isBlockSelected(i)) || hasSameValue(cell),
            'border-t-4': isTopEdge(i),
            'border-l-4': isLeftEdge(i),
            'border-b-4': isBottomEdge(i),

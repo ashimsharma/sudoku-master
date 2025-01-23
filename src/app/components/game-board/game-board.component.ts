@@ -77,6 +77,10 @@ export class GameBoardComponent {
     return `${row}-${column}-${block}`;
   }
 
+  hasSameValue(value: (number | null)): boolean{
+    if(value === null) return false;
+    return this.game[this.selectedCell] === value ? true : false;
+  }
   selectCell(i: number): void {
     const row = Math.floor(i / 9);
     const column = i % 9;
@@ -99,9 +103,9 @@ export class GameBoardComponent {
   }
 
   isTopEdge(i: number): boolean {
-    const row = Math.floor(i / 9); // Zero-based row
-    const col = i % 9; // Zero-based column
-    return row % 3 === 0; // First row of the 3x3 block
+    const row = Math.floor(i / 9); 
+    const col = i % 9; 
+    return row % 3 === 0; 
   }
 
   // Function to check if the current cell is at the left edge of a 3x3 block
