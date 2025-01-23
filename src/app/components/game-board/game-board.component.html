@@ -8,6 +8,7 @@
            'border-l-4': isLeftEdge(i),
            'border-b-4': isBottomEdge(i),
            'border-r-4': isRightEdge(i),
+           'text-red-500': isOnCorrectPosition(i, cell)
          }" (click)="selectCell(i)">
         {{ cell }}
     </div>
