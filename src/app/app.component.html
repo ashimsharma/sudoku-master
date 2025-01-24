@@ -10,19 +10,22 @@
 <header class="text-center text-white bg-red-600 p-4 text-3xl">
   <h1>Sudoku Master</h1>
 </header>
-<main>
-  <div class="flex justify-center items-center gap-10 h-1/2">
+<main class="min-h-screen">
+  <div class="flex justify-center gap-10">
     <div>
       <app-game-board></app-game-board>
     </div>
     <div>
-      <app-timer></app-timer>
+      <div class="grid grid-cols-2">
+        <app-timer></app-timer>
+        <app-score-card></app-score-card>
+      </div>
       <app-keypad></app-keypad>
       <app-button-pallet></app-button-pallet>
     </div>
   </div>
 </main>
-<footer class="text-center text-white bg-red-600 p-2 fixed bottom-0 w-full">
+<footer class="text-center text-white bg-red-600 p-2 w-full">
   <p>&copy; {{year}} Ashim Sharma. All rights reserved.</p>
 </footer>
 

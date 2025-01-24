@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SudokuService } from '../../shared/sudoku.service';
 
 @Component({
   selector: 'app-score-card',
@@ -7,10 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './score-card.component.css'
 })
 export class ScoreCardComponent {
-  currentScore: number = 0;
-  highScore: number = 0;
-
-  ngOnInit(): void{
-
-  }
+  constructor(public sharedService: SudokuService){}
 }

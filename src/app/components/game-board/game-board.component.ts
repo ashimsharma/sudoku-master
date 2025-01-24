@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import sudoku from 'sudoku';
 import { NgFor, NgClass } from '@angular/common';
+import { SudokuService } from '../../shared/sudoku.service';
 
 @Component({
   selector: 'app-game-board',
@@ -8,23 +9,18 @@ import { NgFor, NgClass } from '@angular/common';
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.css'],
 })
+
 export class GameBoardComponent {
   Math = Math;
-  initialGameState: (number | null)[];
-  game: (number | null)[];
-  solution: number[];
-  selectedRow: number = -1;
-  selectedColumn: number = -1;
-  selectedBlock: number = -1;
-  selectedCell: number = -1;
+  sharedService: SudokuService;
 
-  constructor() {
-    this.game = [];
-    this.solution = [];
-    this.initialGameState = [];
+  constructor(sharedService: SudokuService) {
+    this.sharedService = sharedService;
   }
+
   ngOnInit(): void {
-    this.loadBoard();
+    this.sharedService.loadBoard();
+    console.log(this.sharedService.solution);
     window.addEventListener('keydown', this.handleKeyPress.bind(this))
   }
 
@@ -34,30 +30,23 @@ export class GameBoardComponent {
 
   handleKeyPress(event: KeyboardEvent): void {
     const digit = Number(event.key);
-    if (this.selectedCell !== null && digit >= 1 && digit <= 9) {
+    if (this.sharedService.selectedCell !== null && digit >= 1 && digit <= 9) {
       this.addDigit(digit);
     }
   }
 
   addDigit(digit: number): void {
-    if (this.selectedCell !== null && this.initialGameState[this.selectedCell] === null) {
-      this.game[this.selectedCell] = digit; 
+    if (this.sharedService.selectedCell !== null && this.sharedService.initialGameState[this.sharedService.selectedCell] === null) {
+      this.sharedService.game[this.sharedService.selectedCell] = digit; 
+
+      if(!this.sharedService.isOnWrongPosition(this.sharedService.selectedCell, digit)){
+        this.sharedService.currentScore += 5;
+      }
+
+      if(this.sharedService.isBoardComplete()){
+        alert("You Won!");
+      }
     }
-  }
-
-  loadBoard(): void {
-    this.game = sudoku.makepuzzle();
-    this.solution = sudoku.solvepuzzle(this.game);
-
-    this.game = this.game.map(cell => cell !== null ? cell + 1 : null);
-    this.solution = this.solution.map(cell => cell + 1);
-    
-    this.initialGameState = this.game;
-    console.log(this.solution);
-  }
-
-  isOnCorrectPosition(i: number, valueAdded: (number | null)): boolean {
-    return this.solution[i] !== valueAdded ? true : false;
   }
 
   selectRowAndColumn(i: number): void {
@@ -65,9 +54,9 @@ export class GameBoardComponent {
     const column = i % 9;
     const block = Math.floor(row / 3) * 3 + Math.floor(column / 3);
 
-    this.selectedRow = row;     
-    this.selectedColumn = column; 
-    this.selectedBlock = block;   
+    this.sharedService.selectedRow = row;     
+    this.sharedService.selectedColumn = column; 
+    this.sharedService.selectedBlock = block;   
   }
 
   generateCellId(i: number): string {
@@ -79,27 +68,27 @@ export class GameBoardComponent {
 
   hasSameValue(value: (number | null)): boolean{
     if(value === null) return false;
-    return this.game[this.selectedCell] === value ? true : false;
+    return this.sharedService.game[this.sharedService.selectedCell] === value ? true : false;
   }
   selectCell(i: number): void {
     const row = Math.floor(i / 9);
     const column = i % 9;
     const block = Math.floor(row / 3) * 3 + Math.floor(column / 3);
 
-    this.selectedCell = i;
-    this.selectedRow = row;       
-    this.selectedColumn = column; 
-    this.selectedBlock = block;   
+    this.sharedService.selectedCell = i;
+    this.sharedService.selectedRow = row;       
+    this.sharedService.selectedColumn = column; 
+    this.sharedService.selectedBlock = block;   
   }
 
   isRowSelected(i: number): boolean {
     const row = Math.floor(i / 9);
-    return row === this.selectedRow;
+    return row === this.sharedService.selectedRow;
   }
 
   isColumnSelected(i: number): boolean {
     const column = i % 9;
-    return column === this.selectedColumn;
+    return column === this.sharedService.selectedColumn;
   }
 
   isTopEdge(i: number): boolean {
@@ -122,7 +111,6 @@ export class GameBoardComponent {
     const block = Math.floor(row / 3) * 3 + Math.floor(col / 3);
 
     if([0, 3, 1, 4, 2, 5].includes(block)){
-      console.log(`Row: ${row}, Column: ${col}, Block: ${block}`);
       return false;
     }
     return row % 3 === 2; // Last row of the 3x3 block
@@ -145,6 +133,10 @@ export class GameBoardComponent {
     const row = Math.floor(i / 9);
     const column = i % 9;
     const block = Math.floor(row / 3) * 3 + Math.floor(column / 3);
-    return block === this.selectedBlock;
+    return block === this.sharedService.selectedBlock;
+  }
+
+  isTyped(i: number): boolean{
+    return this.sharedService.initialGameState[i] === null ? true : false;
   }
 }

@@ -1,5 +1,5 @@
 <div class="grid grid-cols-9 grid-rows-9 mx-auto my-4 rounded-md">
-    <div *ngFor="let cell of game; let i = index"
+    <div *ngFor="let cell of sharedService.game; let i = index"
         class="border border-black text-center aspect-square text-2xl p-2 flex justify-center items-center"
         [id]="generateCellId(i)" [ngClass]="{
            'bg-gray-300': isRowSelected(i) || isColumnSelected(i) || isBlockSelected(i),
@@ -8,7 +8,10 @@
            'border-l-4': isLeftEdge(i),
            'border-b-4': isBottomEdge(i),
            'border-r-4': isRightEdge(i),
-           'text-red-500': isOnCorrectPosition(i, cell)
+           'text-red-800': sharedService.isOnWrongPosition(i, cell),
+           'text-green-800': isTyped(i) && !sharedService.isOnWrongPosition(i, cell),
+           'text-black': sharedService.isBoardComplete(),
+           'bg-white': sharedService.isBoardComplete()
          }" (click)="selectCell(i)">
         {{ cell }}
     </div>

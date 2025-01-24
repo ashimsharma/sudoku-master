@@ -1,5 +1,6 @@
-<div class="m-6 text-center">
-    <button class="bg-gray-700 px-4 py-2 rounded-md hover:bg-gray-900 text-white mx-2">Regenrate</button>
-    <button class="bg-gray-700 px-4 py-2 rounded-md hover:bg-gray-900 text-white mx-2">Pause</button>
-    <button class="bg-gray-700 px-4 py-2 rounded-md hover:bg-gray-900 text-white mx-2">Clear</button>
+<div class="m-6 w-full">
+    <button class="bg-gray-700 px-4 py-2 rounded-md hover:bg-gray-900 text-white mx-2" (click)="regenerateBoard()">Regenrate</button>
+    <button class="bg-gray-700 px-4 py-2 rounded-md hover:bg-gray-900 text-white mx-2 w-24" (click)="gamePaused ? resumeGame() : pauseGame()">{{gamePaused ? 'Resume' : 'Pause'}}</button>
+    <button class="bg-gray-700 px-4 py-2 rounded-md hover:bg-gray-900 text-white mx-2" (click)="clearBoard()">Restart</button>
+    <button class="bg-gray-700 px-4 py-2 rounded-md hover:bg-gray-900 text-white mx-2" (click)="eraseCell()">Erase</button>
 </div>

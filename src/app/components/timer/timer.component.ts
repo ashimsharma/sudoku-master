@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SudokuService } from '../../shared/sudoku.service';
 
 @Component({
   selector: 'app-timer',
@@ -7,22 +8,19 @@ import { Component } from '@angular/core';
   styleUrl: './timer.component.css'
 })
 export class TimerComponent {
-  secondsPassed: number = 0;
-  minutesPassed: number = 0;
-  timerInterval: (ReturnType<typeof setInterval> | null) = null;
-
+  constructor(private sharedService: SudokuService){}
   get formattedTime(): string {
-    return `${this.minutesPassed > 9 ? this.minutesPassed : `0${this.minutesPassed}`} : ${this.secondsPassed > 9 ? this.secondsPassed : `0${this.secondsPassed}`}`;
+    return `${this.sharedService.minutesPassed > 9 ? this.sharedService.minutesPassed : `0${this.sharedService.minutesPassed}`} : ${this.sharedService.secondsPassed > 9 ? this.sharedService.secondsPassed : `0${this.sharedService.secondsPassed}`}`;
   }
 
   ngOnInit(): void{
-    this.timerInterval = setInterval(() => {
-      if(this.secondsPassed === 59){
-        this.minutesPassed += 1;
-        this.secondsPassed = 0;
+    this.sharedService.timerInterval = setInterval(() => {
+      if(this.sharedService.secondsPassed === 59){
+        this.sharedService.minutesPassed += 1;
+        this.sharedService.secondsPassed = 0;
         return;
       }
-      this.secondsPassed += 1;
+      this.sharedService.secondsPassed += 1;
     }, 1000)
   }
 }
