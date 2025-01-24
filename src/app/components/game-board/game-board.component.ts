@@ -41,7 +41,12 @@ export class GameBoardComponent {
     if (this.sharedService.selectedCell !== null && this.sharedService.initialGameState[this.sharedService.selectedCell] === null) {
       this.sharedService.game[this.sharedService.selectedCell] = digit; 
 
-      if(this.sharedService.isAlreadyMarked()) return;
+      if(this.sharedService.isAlreadyMarked()) {
+        if(this.sharedService.isOnWrongPosition(this.sharedService.selectedCell, digit)){
+          this.sharedService.updateMistakes();
+        }
+        return;
+      };
 
       if(!this.sharedService.isOnWrongPosition(this.sharedService.selectedCell, digit)){
         this.sharedService.updateTimeElapsed();
@@ -58,7 +63,7 @@ export class GameBoardComponent {
       }
 
       if(this.sharedService.isBoardComplete()){
-        alert("You Won!");
+        this.sharedService.showWonModal();
       }
     }
   }

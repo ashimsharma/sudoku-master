@@ -38,6 +38,11 @@ export class SudokuService {
   message: string = '';
   isPositiveMessage: boolean = true;
   isShow: boolean = false;
+  
+  modalTitle: string = ``;
+  modalContentScore: string = ``;
+  modalContentTime: string = ``;
+  modalVisible: boolean = false;
 
   constructor() {}
 
@@ -61,7 +66,12 @@ export class SudokuService {
 
     this.game[this.selectedCell] = pressedKey;
 
-    if (this.isAlreadyMarked()) return;
+    if (this.isAlreadyMarked()) {
+      if(this.isOnWrongPosition(this.selectedCell, pressedKey)){
+        this.updateMistakes();
+      }
+      return;
+    };
 
     if (!this.isOnWrongPosition(this.selectedCell, pressedKey)) {
       this.updateTimeElapsed();
@@ -73,9 +83,12 @@ export class SudokuService {
       this.updateScore();
       this.generateScorePopUp();
     }
+    else{
+      this.updateMistakes();
+    }
 
     if (this.isBoardComplete()) {
-      alert('You Won!');
+      this.showWonModal();
     }
   }
 
@@ -133,5 +146,44 @@ export class SudokuService {
 
   updateMistakes(): void{
     this.mistakes += 1;
+    if(this.mistakes === 5){
+      this.showLoseModal()
+    }
+  }
+
+  startNewGame(): void{
+    this.modalVisible = false;
+    this.getToInitialState();
+    this.loadBoard();
+  }
+
+  showWonModal(): void{
+    this.modalVisible = true;
+    this.modalTitle = 'Congratulations!! You Won';
+    this.modalContentScore = `Your Score : ${this.currentScore}`;
+    this.modalContentTime = `Time Taken: ${this.minutesPassed} minutes ${this.secondsPassed} seconds`;
+  }
+
+  showLoseModal(): void{
+    this.modalVisible = true;
+    this.modalTitle = 'Oops! You Lose';
+    this.modalContentScore = `Your Score : ${this.currentScore}`;
+    this.modalContentTime = `Time Taken: ${this.minutesPassed} minutes ${this.secondsPassed} seconds`;
+  }
+
+  getToInitialState(): void{
+    this.secondsPassed = 0;
+    this.minutesPassed = 0;
+    this.currentScore = 0;
+    this.mistakes = 0;
+    this.scoreValue = this.baseScore +
+    (Math.floor(
+      (this.baseScore * 10) / this.timeElapsedBetweenTwoCorrectEntries
+    ) -
+    this.mistakes * this.baseScore) > 0 ? this.baseScore +
+    (Math.floor(
+      (this.baseScore * 10) / this.timeElapsedBetweenTwoCorrectEntries
+    ) -
+    this.mistakes * this.baseScore) : this.baseScore;
   }
 }

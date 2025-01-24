@@ -7,10 +7,12 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<header class="text-center text-white bg-red-600 p-4 text-3xl">
+<app-video-container class="relative w-full h-screen"></app-video-container>
+<header class="text-center text-white bg-red-600 p-4 text-3xl font-bold">
   <h1>Sudoku Master</h1>
 </header>
 <main class="min-h-screen">
+  <app-modal></app-modal>
   <div class="flex justify-center gap-10">
     <div>
       <app-game-board></app-game-board>
@@ -24,6 +26,19 @@
       <app-keypad></app-keypad>
       <app-button-pallet></app-button-pallet>
     </div>
+  </div>
+
+  <div class="bg-gray-800 text-white p-4 rounded-lg shadow-lg max-w-fit mx-auto">
+    <h2 class="font-bold mb-4 text-center">Sudoku Rules</h2>
+    <p>
+      1. Each row must contain the numbers 1 through 9, without repetition.
+    </p>
+    <p>
+      2. Each column must contain the numbers 1 through 9, without repetition.
+    </p>
+    <p>
+      3. Each of the 9 sub-grids (3x3) must contain the numbers 1 through 9, without repetition.
+    </p>
   </div>
 </main>
 <footer class="text-center text-white bg-red-600 p-2 w-full">

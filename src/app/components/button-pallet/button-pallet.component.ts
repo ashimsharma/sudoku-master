@@ -19,6 +19,8 @@ export class ButtonPalletComponent {
     this.sharedService.game = [...this.sharedService.initialGameState];
     this.sharedService.secondsPassed = 0;
     this.sharedService.minutesPassed = 0;
+    this.sharedService.currentScore = 0;
+    this.sharedService.mistakes = 0;
   }
 
   regenerateBoard(): void{

@@ -7,10 +7,12 @@ import { TimerComponent } from './components/timer/timer.component';
 import { ScoreCardComponent } from './components/score-card/score-card.component';
 import { PopupComponent } from './components/popup/popup.component';
 import { MistakeBoardComponent } from './components/mistake-board/mistake-board.component';
+import { VideoContainerComponent } from './components/video-container/video-container.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, GameBoardComponent, KeypadComponent, ButtonPalletComponent, TimerComponent, ScoreCardComponent, MistakeBoardComponent],
+  imports: [RouterOutlet, GameBoardComponent, KeypadComponent, ButtonPalletComponent, TimerComponent, ScoreCardComponent, MistakeBoardComponent, VideoContainerComponent, ModalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
