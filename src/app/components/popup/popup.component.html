@@ -1,0 +1,7 @@
+<div class="p-1 text-white rounded-lg px-2" [ngClass]="{
+    'hidden': !sharedService.isShow,
+    'bg-red-500': !sharedService.isPositiveMessage,
+    'bg-green-500': sharedService.isPositiveMessage
+}">
+    {{sharedService.message}}
+</div>

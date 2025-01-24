@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import sudoku from 'sudoku';
 import { NgFor, NgClass } from '@angular/common';
 import { SudokuService } from '../../shared/sudoku.service';
+import { PopupComponent } from '../popup/popup.component';
 
 @Component({
   selector: 'app-game-board',
-  imports: [NgFor, NgClass],
+  imports: [NgFor, NgClass, PopupComponent],
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.css'],
 })
@@ -30,6 +31,7 @@ export class GameBoardComponent {
 
   handleKeyPress(event: KeyboardEvent): void {
     const digit = Number(event.key);
+
     if (this.sharedService.selectedCell !== null && digit >= 1 && digit <= 9) {
       this.addDigit(digit);
     }
@@ -39,8 +41,20 @@ export class GameBoardComponent {
     if (this.sharedService.selectedCell !== null && this.sharedService.initialGameState[this.sharedService.selectedCell] === null) {
       this.sharedService.game[this.sharedService.selectedCell] = digit; 
 
+      if(this.sharedService.isAlreadyMarked()) return;
+
       if(!this.sharedService.isOnWrongPosition(this.sharedService.selectedCell, digit)){
-        this.sharedService.currentScore += 5;
+        this.sharedService.updateTimeElapsed();
+        this.sharedService.updateScoreValue();
+        this.sharedService.updateTimeOfLastCorrectEntry();
+
+        this.sharedService.alreadyMarkedCells[this.sharedService.selectedCell] = true;
+
+        this.sharedService.updateScore();
+        this.sharedService.generateScorePopUp();
+      }
+      else{
+        this.sharedService.updateMistakes();
       }
 
       if(this.sharedService.isBoardComplete()){
@@ -70,6 +84,7 @@ export class GameBoardComponent {
     if(value === null) return false;
     return this.sharedService.game[this.sharedService.selectedCell] === value ? true : false;
   }
+
   selectCell(i: number): void {
     const row = Math.floor(i / 9);
     const column = i % 9;
