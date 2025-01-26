@@ -12,6 +12,8 @@ export class ButtonPalletComponent {
   constructor(private sharedService: SudokuService){}
 
   eraseCell(): void{
+    if(this.sharedService.initialGameState[this.sharedService.selectedCell] !== null) return;
+    
     this.sharedService.game[this.sharedService.selectedCell] = null;
   }
 

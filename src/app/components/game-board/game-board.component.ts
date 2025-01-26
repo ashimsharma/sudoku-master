@@ -30,6 +30,11 @@ export class GameBoardComponent {
   }
 
   handleKeyPress(event: KeyboardEvent): void {
+    if(this.sharedService.selectedCell !== null && event.key === "Backspace"){
+      this.removeDigit();
+      return;
+    }
+
     const digit = Number(event.key);
 
     if (this.sharedService.selectedCell !== null && digit >= 1 && digit <= 9) {
@@ -66,6 +71,12 @@ export class GameBoardComponent {
         this.sharedService.showWonModal();
       }
     }
+  }
+
+  removeDigit(): void{
+    if(this.sharedService.initialGameState[this.sharedService.selectedCell] !== null) return;
+
+    this.sharedService.game[this.sharedService.selectedCell] = null;
   }
 
   selectRowAndColumn(i: number): void {
