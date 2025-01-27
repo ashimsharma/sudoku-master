@@ -138,7 +138,7 @@ export class SudokuService {
     (Math.floor(
       (this.baseScore * 10) / this.timeElapsedBetweenTwoCorrectEntries
     ) -
-    this.mistakes * this.baseScore) > 0 ? this.baseScore +
+    this.mistakes * this.baseScore) > 10 ? this.baseScore +
     (Math.floor(
       (this.baseScore * 10) / this.timeElapsedBetweenTwoCorrectEntries
     ) -

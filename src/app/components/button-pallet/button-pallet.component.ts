@@ -27,6 +27,7 @@ export class ButtonPalletComponent {
 
   regenerateBoard(): void{
     this.sharedService.loadBoard();
+    this.restartGame();
   }
 
   pauseGame(): void{

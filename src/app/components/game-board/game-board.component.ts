@@ -30,8 +30,16 @@ export class GameBoardComponent {
   }
 
   handleKeyPress(event: KeyboardEvent): void {
+    event.preventDefault();
     if(this.sharedService.selectedCell !== null && event.key === "Backspace"){
       this.removeDigit();
+      return;
+    }
+
+    const arrowKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
+
+    if(this.sharedService.selectedCell !== null && arrowKeys.includes(event.key)){
+      this.shiftCell(event);
       return;
     }
 
@@ -79,6 +87,28 @@ export class GameBoardComponent {
     this.sharedService.game[this.sharedService.selectedCell] = null;
   }
 
+  shiftCell(event: KeyboardEvent): void{
+    if(event.key === "ArrowLeft"){
+      if(this.sharedService.selectedCell === 0) return;
+      console.log("I have not returned");
+      this.selectCell(this.sharedService.selectedCell - 1);
+    }
+    else if(event.key === "ArrowRight"){
+      if(this.sharedService.selectedCell === 80) return;
+      console.log("I ahve not returned.")
+      this.selectCell(this.sharedService.selectedCell + 1);
+    }
+    else if(event.key === "ArrowUp"){
+      if(this.sharedService.selectedCell <= 8) return;
+      this.selectCell(this.sharedService.selectedCell - 9);
+      console.log(this.sharedService.selectedCell);
+    }
+    else{
+      if(this.sharedService.selectedCell >= 71) return;
+      this.selectCell(this.sharedService.selectedCell + 9);
+    }
+  }
+
   selectRowAndColumn(i: number): void {
     const row = Math.floor(i / 9);
     const column = i % 9;
@@ -110,7 +140,6 @@ export class GameBoardComponent {
     this.sharedService.selectedRow = row;       
     this.sharedService.selectedColumn = column; 
     this.sharedService.selectedBlock = block;
-    console.log("I ran");   
   }
 
   isRowSelected(i: number): boolean {

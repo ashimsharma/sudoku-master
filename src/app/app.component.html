@@ -11,24 +11,26 @@
 <header class="text-center text-white bg-red-600 p-4 text-3xl font-bold">
   <h1>Sudoku Master</h1>
 </header>
-<main class="min-h-screen">
+<main class="min-h-screen max-w-screen m-4">
   <app-modal></app-modal>
-  <div class="flex justify-center gap-10">
+  <div class="flex justify-center lg:gap-10 lg:flex-row flex-col lg:w-full">
     <div>
       <app-game-board></app-game-board>
     </div>
-    <div>
+    <div class="lg:block flex flex-col-reverse">
       <div class="grid grid-cols-3">
         <app-timer></app-timer>
         <app-mistake-board></app-mistake-board>
         <app-score-card></app-score-card>
       </div>
-      <app-keypad></app-keypad>
-      <app-button-pallet></app-button-pallet>
+      <div>
+        <app-keypad></app-keypad>
+        <app-button-pallet></app-button-pallet>
+      </div>
     </div>
   </div>
 
-  <div class="bg-gray-800 text-white p-4 rounded-lg shadow-lg max-w-fit mx-auto">
+  <div class="bg-gray-800 text-white p-4 rounded-lg shadow-lg lg:max-w-fit lg:w-fit mx-auto w-[90%] mb-2">
     <h2 class="font-bold mb-4 text-center">Sudoku Rules</h2>
     <p>
       1. Each row must contain the numbers 1 through 9, without repetition.
