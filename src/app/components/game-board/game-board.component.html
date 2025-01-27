@@ -4,7 +4,7 @@
         class="border border-black text-center text-black lg:w-14 lg:h-14 w-auto h-auto text-2xl p-2 flex justify-center items-center"
         [id]="generateCellId(i)" [ngClass]="{
            'bg-gray-300': isRowSelected(i) || isColumnSelected(i) || isBlockSelected(i),
-           'bg-blue-200': (isRowSelected(i) && isColumnSelected(i) && isBlockSelected(i)),
+           '!bg-blue-200': (isRowSelected(i) && isColumnSelected(i) && isBlockSelected(i)),
            'bg-gray-400': hasSameValue(cell),
            'border-t-4': isTopEdge(i),
            'border-l-4': isLeftEdge(i),
