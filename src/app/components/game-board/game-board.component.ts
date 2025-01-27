@@ -109,7 +109,8 @@ export class GameBoardComponent {
     this.sharedService.selectedCell = i;
     this.sharedService.selectedRow = row;       
     this.sharedService.selectedColumn = column; 
-    this.sharedService.selectedBlock = block;   
+    this.sharedService.selectedBlock = block;
+    console.log("I ran");   
   }
 
   isRowSelected(i: number): boolean {

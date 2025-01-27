@@ -49,4 +49,11 @@ export class ButtonPalletComponent {
     
     this.gamePaused = false;
   }
+
+  restartGame(): void{
+    this.clearBoard();
+    if(this.gamePaused){
+      this.resumeGame();
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import sudoku from 'sudoku';
+import {getSudoku} from 'sudoku-gen';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,7 @@ export class SudokuService {
     (Math.floor(
       (this.baseScore * 10) / this.timeElapsedBetweenTwoCorrectEntries
     ) -
-    this.mistakes * this.baseScore) > 0 ? this.baseScore +
+    this.mistakes * this.baseScore) > 10 ? this.baseScore +
     (Math.floor(
       (this.baseScore * 10) / this.timeElapsedBetweenTwoCorrectEntries
     ) -
@@ -47,11 +48,11 @@ export class SudokuService {
   constructor() {}
 
   loadBoard(): void {
-    this.game = sudoku.makepuzzle();
-    this.solution = sudoku.solvepuzzle(this.game);
+    const sudokuGameObj = getSudoku('easy');
 
-    this.game = this.game.map((cell) => (cell !== null ? cell + 1 : null));
-    this.solution = this.solution.map((cell) => cell + 1);
+    this.game = sudokuGameObj.puzzle.split('').map(value => !isNaN(Number(value)) ? +value : null);
+
+    this.solution = sudokuGameObj.solution.split('').map(value => +value);
 
     this.initialGameState = [...this.game];
   }
