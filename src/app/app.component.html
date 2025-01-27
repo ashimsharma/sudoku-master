@@ -8,9 +8,18 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <app-video-container class="relative w-full h-screen"></app-video-container>
-<header class="text-center text-white bg-red-600 p-4 text-3xl font-bold">
-  <h1>Sudoku Master</h1>
-</header>
+<!-- Add this link in the <head> section of your HTML -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <header class="bg-gray-900 text-gray-100 py-6 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center px-6">
+      <h1 class="text-5xl font-extrabold tracking-wide" style="font-family: 'Bebas Neue', sans-serif;">
+        <span class="text-red-500">Sudoku</span> Master
+      </h1>
+    </div>
+  </header>
+  
+
 <main class="min-h-screen max-w-screen m-4">
   <app-modal></app-modal>
   <div class="flex justify-center lg:gap-10 lg:flex-row flex-col lg:w-full">
@@ -18,7 +27,7 @@
       <app-game-board></app-game-board>
     </div>
     <div class="lg:block flex flex-col-reverse">
-      <div class="grid grid-cols-3">
+      <div class="grid grid-cols-3 text-slate-100">
         <app-timer></app-timer>
         <app-mistake-board></app-mistake-board>
         <app-score-card></app-score-card>
@@ -30,8 +39,10 @@
     </div>
   </div>
 
-  <div class="bg-gray-800 text-white p-4 rounded-lg shadow-lg lg:max-w-fit lg:w-fit mx-auto w-[90%] mb-2">
-    <h2 class="font-bold mb-4 text-center">Sudoku Rules</h2>
+  <div class="bg-slate-700 text-slate-100 p-4 rounded-lg shadow-lg lg:max-w-fit lg:w-fit mx-auto w-[90%] mb-2">
+    <h2 class="font-bold mb-4 text-center text-red-600">
+      SUDOKU GUIDELINES
+    </h2>
     <p>
       1. Each row must contain the numbers 1 through 9, without repetition.
     </p>
@@ -43,7 +54,7 @@
     </p>
   </div>
 </main>
-<footer class="text-center text-white bg-red-600 p-2 w-full">
+<footer class="text-center text-white bg-gray-900 p-2 w-full text-sm">
   <p>&copy; {{year}} Ashim Sharma. All rights reserved.</p>
 </footer>
 
