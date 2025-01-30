@@ -21,7 +21,6 @@ export class GameBoardComponent {
 
   ngOnInit(): void {
     this.sharedService.loadBoard();
-    console.log(this.sharedService.solution);
     window.addEventListener('keydown', this.handleKeyPress.bind(this))
   }
 
@@ -90,18 +89,15 @@ export class GameBoardComponent {
   shiftCell(event: KeyboardEvent): void{
     if(event.key === "ArrowLeft"){
       if(this.sharedService.selectedCell === 0) return;
-      console.log("I have not returned");
       this.selectCell(this.sharedService.selectedCell - 1);
     }
     else if(event.key === "ArrowRight"){
       if(this.sharedService.selectedCell === 80) return;
-      console.log("I ahve not returned.")
       this.selectCell(this.sharedService.selectedCell + 1);
     }
     else if(event.key === "ArrowUp"){
       if(this.sharedService.selectedCell <= 8) return;
       this.selectCell(this.sharedService.selectedCell - 9);
-      console.log(this.sharedService.selectedCell);
     }
     else{
       if(this.sharedService.selectedCell >= 71) return;

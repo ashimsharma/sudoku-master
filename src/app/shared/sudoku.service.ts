@@ -25,16 +25,7 @@ export class SudokuService {
 
   baseScore: number = 10;
   currentScore: number = 0;
-  scoreValue: number =
-    this.baseScore +
-    (Math.floor(
-      (this.baseScore * 10) / this.timeElapsedBetweenTwoCorrectEntries
-    ) -
-    this.mistakes * this.baseScore) > 10 ? this.baseScore +
-    (Math.floor(
-      (this.baseScore * 10) / this.timeElapsedBetweenTwoCorrectEntries
-    ) -
-    this.mistakes * this.baseScore) : this.baseScore;
+  scoreValue: number = 0;
 
   message: string = '';
   isPositiveMessage: boolean = true;
@@ -136,11 +127,11 @@ export class SudokuService {
     this.scoreValue =
     this.baseScore +
     (Math.floor(
-      (this.baseScore * 10) / this.timeElapsedBetweenTwoCorrectEntries
+      (this.baseScore * 10) / (this.timeElapsedBetweenTwoCorrectEntries !== 0 ? this.timeElapsedBetweenTwoCorrectEntries : 1)
     ) -
     this.mistakes * this.baseScore) > 10 ? this.baseScore +
     (Math.floor(
-      (this.baseScore * 10) / this.timeElapsedBetweenTwoCorrectEntries
+      (this.baseScore * 10) / (this.timeElapsedBetweenTwoCorrectEntries !== 0 ? this.timeElapsedBetweenTwoCorrectEntries : 1)
     ) -
     this.mistakes * this.baseScore) : this.baseScore;
   }

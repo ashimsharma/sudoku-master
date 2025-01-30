@@ -6,8 +6,6 @@
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<app-video-container class="relative w-full h-screen"></app-video-container>
 <!-- Add this link in the <head> section of your HTML -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
@@ -22,20 +20,20 @@
 
 <main class="min-h-screen max-w-screen m-4">
   <app-modal></app-modal>
-  <div class="flex justify-center lg:gap-10 lg:flex-row flex-col lg:w-full">
-    <div>
+  <div class="grid grid-cols-12 grid-rows-8 w-fit m-auto gap-x-5 gap-y-2 lg:gap-y-0 lg:grid-rows-7">
+    <div class="col-start-1 lg:row-start-1 row-start-2 row-end-7 col-end-13 lg:row-end-13 lg:col-end-7">
       <app-game-board></app-game-board>
     </div>
-    <div class="lg:block flex flex-col-reverse">
-      <div class="grid grid-cols-3 text-slate-100">
-        <app-timer></app-timer>
-        <app-mistake-board></app-mistake-board>
-        <app-score-card></app-score-card>
-      </div>
-      <div>
-        <app-keypad></app-keypad>
-        <app-button-pallet></app-button-pallet>
-      </div>
+    <div class="grid grid-cols-3 text-white gap-10 lg:col-start-7 col-start-1 col-end-13 row-start-1 row-end-2 lg:mt-5">
+      <app-timer></app-timer>
+      <app-mistake-board></app-mistake-board>
+      <app-score-card></app-score-card>
+    </div>
+    <div class="col-start-1 col-end-13 row-start-7 row-end-10 lg:col-start-7 lg:col-end-13 lg:row-start-2 lg:row-end-6 lg:mt-4">
+      <app-keypad></app-keypad>
+    </div>
+    <div class="col-start-1 col-end-13 row-start-8 row-end-9 lg:col-start-7 lg:col-end-13 lg:row-start-6 lg:row-end-8">
+      <app-button-pallet></app-button-pallet>
     </div>
   </div>
 
