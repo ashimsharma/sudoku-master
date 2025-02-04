@@ -22,6 +22,7 @@ import { skip } from 'rxjs/operators';
 export class AppComponent {
   private subscription!: Subscription;
   year = (new Date()).getFullYear();
+  title = "Sudoku";
   
   constructor(
     private renderer2: Renderer2,
