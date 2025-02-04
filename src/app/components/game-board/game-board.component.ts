@@ -75,6 +75,7 @@ export class GameBoardComponent {
       }
 
       if(this.sharedService.isBoardComplete()){
+        this.sharedService.appComponentFunctionSubject.next();
         this.sharedService.showWonModal();
       }
     }

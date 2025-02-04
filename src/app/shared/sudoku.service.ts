@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import sudoku from 'sudoku';
 import {getSudoku} from 'sudoku-gen';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SudokuService {
+  appComponentFunctionSubject = new BehaviorSubject<void>(undefined);
+  appComponentFunction$ = this.appComponentFunctionSubject.asObservable();
+  
   initialGameState: (number | null)[] = [];
   game: (number | null)[] = [];
   solution: number[] = [];
+
   selectedRow: number = -1;
   selectedColumn: number = -1;
   selectedBlock: number = -1;
@@ -80,6 +84,7 @@ export class SudokuService {
     }
 
     if (this.isBoardComplete()) {
+      this.appComponentFunctionSubject.next();
       this.showWonModal();
     }
   }
