@@ -197,4 +197,20 @@ export class GameBoardComponent {
   isTyped(i: number): boolean{
     return this.sharedService.initialGameState[i] === null ? true : false;
   }
+
+  wrongCellReason(i: number): boolean{
+    const row = Math.floor(i / 9);
+    const column = i % 9;
+    const block = Math.floor(Math.floor(i / 9) / 3) * 3 + Math.floor(column / 3);
+
+    const selectedCellRow = Math.floor(this.sharedService.selectedCell / 9);
+    const selectedCellColumn = this.sharedService.selectedCell % 9;
+    const selectedCellBlock = Math.floor(Math.floor(this.sharedService.selectedCell / 9) / 3) * 3 + Math.floor(selectedCellColumn / 3);
+
+    if((row === selectedCellRow) || (column === selectedCellColumn) || (block === selectedCellBlock)){
+      return true;
+    }
+
+    return false;
+  }
 }

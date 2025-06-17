@@ -13,7 +13,8 @@
            'text-red-600': sharedService.isOnWrongPosition(i, cell),
            'text-green-600': isTyped(i) && !sharedService.isOnWrongPosition(i, cell),
            'text-black': sharedService.isBoardComplete(),
-           'bg-blue-50': sharedService.isBoardComplete()
+           'bg-blue-50': sharedService.isBoardComplete(),
+           'bg-red-200': cell !== null && wrongCellReason(i) && sharedService.game[sharedService.selectedCell] === cell && sharedService.isOnWrongPosition(sharedService.selectedCell, sharedService.game[sharedService.selectedCell]) 
          }" (click)="selectCell(i)">
         {{ cell }}
     </div>
