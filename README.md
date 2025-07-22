@@ -18,4 +18,4 @@
 
 ## Live Demo
 
-Play the game here: [https://sudokumaster.dev](https://sudokumaster.ashimsharma.com)
+Play the game here: [https://sudokumaster.ashimsharma.com](https://sudokumaster.ashimsharma.com)
